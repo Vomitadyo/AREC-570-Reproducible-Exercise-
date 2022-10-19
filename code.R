@@ -7,10 +7,10 @@ library(ggplot2)
 
 
 #Load data
-gdp52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_52-67.csv")
-le52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_52-67.csv")
-le72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_72-07.csv")
-gdp72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_72-07.csv")
+gdp52_67 <- read.csv("inputs\\gdp_52_67.csv")
+le52_67 <- read.csv("inputs\\le_52_67.csv")
+le72_07 <- read.csv("inputs\\le_72_07.csv")
+gdp72_07 <- read.csv("inputs\\gdp_72_07.csv")
 
 
 
