@@ -1,12 +1,16 @@
-# Assignment on Reproducibility new
+# Assignment on Reproducibility
 
 rm(list=ls())
-library(tibble)
+library(dplyr)
+library(ggplot2)
 
 
-#create table
+
+#Load data
 gdp52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_52-67.csv")
 le52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_52-67.csv")
+le72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_72-07.csv")
+gdp72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_72-07.csv")
 
 
 
@@ -38,8 +42,6 @@ gdpLe%>%
 
 #merge from 1952 to 2007
 
-le72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_72-07.csv")
-gdp72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_72-07.csv")
 
 
 merged1 <- merge(gdp72_07, le72_07, by =c("country", "continent", "year"))
@@ -52,6 +54,12 @@ data_complete <- rbind(gdpLe, gdpLe1)
 
 OLS <- lm(lifeExp~gdpPercap,  data =data_complete)
 summary(OLS)
+
+
+
+
+
+
 
 
 
