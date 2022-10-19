@@ -3,23 +3,59 @@
 rm(list=ls())
 library(tibble)
 
+
 #create table
-df1 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_52-67.csv")
+gdp52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_52-67.csv")
+le52_67 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_52-67.csv")
+
+
 
 #Create a single table spanning 1952-1967 with the following columns: continent, country, year, lifeExp, pop, and gdp.
-
-#Create Column with arbitrary numbers, join and rearrange. 
-lifeExp <- c(length(568))
-df2 <- data.frame(df1,lifeExp)
+merged <- merge(gdp52_67, le52_67, by =c("country", "continent", "year"))
 col_order <- c("continent", "country", "year", "lifeExp", "pop", "gdp")
-df3 <- df2[, col_order]
-
-#Create a table from the data frame 
-tab1 <- table(df3$continent, df3$country, df3$year, df3$lifeExp, df3$pop, df3$gdp) #Table is too bit to be displayed. 
+gdpLe <- merged[, col_order]
 
 
-#5. Calculate gdp per capita and name it gdpPercap
-df3$gdpPercap <- df3$gdp/df3$pop 
+#5. Calculate GDP per capita and name it gdpPercap
+gdpLe$gdpPercap <- gdpLe$gdp/gdpLe$pop
+
+
+
+#6. Visualize life expectancy and GDP per capita over time for Canada in the 1950s and 1960s using a line plot
+
+gdpLe%>%
+  filter(country=="Canada")%>%
+  ggplot(aes(x=year, y=lifeExp, tittle = ""))+
+  geom_point()+
+  geom_line(color="red")+
+  theme_bw()+
+  labs(title="Life Expectance of Canada")
+
+
+
+
+#7.Regress life expectancy on gdp per capita and display the regression table. Don’t worry about the ancillary stats.
+
+#merge from 1952 to 2007
+
+le72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\le_72-07.csv")
+gdp72_07 <- read.csv("C:\\Users\\Vomitadyo\\Desktop\\AREC 570 Research Methods\\Reporducible Exercise\\inputs\\gdp_72-07.csv")
+
+
+merged1 <- merge(gdp72_07, le72_07, by =c("country", "continent", "year"))
+col_order1 <- c("continent", "country", "year", "lifeExp", "pop", "gdp")
+gdpLe1 <- merged[, col_order1]
+gdpLe1$gdpPercap <- gdpLe1$gdp/gdpLe1$pop
+data_complete <- rbind(gdpLe, gdpLe1)
+
+
+
+OLS <- lm(lifeExp~gdpPercap,  data =data_complete)
+summary(OLS)
+
+
+
+
 
 
 
