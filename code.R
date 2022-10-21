@@ -29,6 +29,16 @@ gdpLe$gdpPercap <- gdpLe$gdp/gdpLe$pop
 
 gdpLe%>%
   filter(country=="Canada")%>%
+  ggplot(aes(x=year, y=gdpPercap, tittle = ""))+
+  geom_point()+
+  geom_line(color="red")+
+  theme_bw()+
+  labs(title="GDP per Capita of Canada")
+
+
+
+gdpLe%>%
+  filter(country=="Canada")%>%
   ggplot(aes(x=year, y=lifeExp, tittle = ""))+
   geom_point()+
   geom_line(color="red")+
